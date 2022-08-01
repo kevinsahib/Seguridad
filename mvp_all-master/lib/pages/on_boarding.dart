@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mvp_all/pages/Home.dart';
+import 'package:mvp_all/pages/progressviews.dart';
 import 'package:mvp_all/styles/colors/colors_views.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -11,6 +13,7 @@ class OnBoarding extends StatefulWidget {
 
 class _OnBoardingState extends State<OnBoarding> {
   int page = 0;
+  PageController pageController = PageController();
   List<Map<String, String>> onBoardingDatas = [
     {
       "text": "ESPARCIMIENTO",
@@ -44,7 +47,7 @@ class _OnBoardingState extends State<OnBoarding> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          color: Colors.white,
+          color: ColorSelect.paginator,
           child: SizedBox(
             width: double.infinity,
             child: Column(
@@ -57,6 +60,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         page = value;
                       });
                     },
+                    controller: pageController,
                     itemCount: onBoardingDatas.length,
                     itemBuilder: (context, index) => ContentBoarding(
                       text: onBoardingDatas[index]["text"]!,
@@ -71,13 +75,18 @@ class _OnBoardingState extends State<OnBoarding> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(onBoardingDatas.length,
-                            (index) => newMethod(index: index)),
+                        children: List.generate(
+                          onBoardingDatas.length,
+                          (index) => newMethod(index: index),
+                        ),
                       ),
                     ],
                   ),
                 ),
-                _buttonBoarding(index: page),
+                _buttonBoarding(
+                  page,
+                  (onBoardingDatas.length - 1),
+                ),
               ],
             ),
           ),
@@ -100,53 +109,53 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  _buttonBoarding({required int index}) {
-    if (index != 4) {
-      return Container(
-        margin: const EdgeInsets.only(bottom: 30),
-        height: 50,
-        width: 350,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          shape: BoxShape.rectangle,
-          border: Border.all(
-            color: ColorSelect.btnTextBo1,
-            width: 3,
-          ),
+  _buttonBoarding(int index, int size) {
+    return Container(
+      height: 50,
+      width: 350,
+      margin: const EdgeInsets.only(bottom: 30),
+      decoration: BoxDecoration(
+        color: ColorSelect.btnBackgrounBo1,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          color: index == size
+              ? ColorSelect.borderContainer
+              : ColorSelect.btnblack,
         ),
-        alignment: Alignment.center,
-        child: const Text(
-          'Siguiente',
+      ),
+      child: ElevatedButton(
+        onPressed: () {
+          if (index == size) {
+            showCupertinoModalPopup(
+                context: context,
+                builder: (context) => const ProgressView("OnBoarding"));
+          } else {
+            if (index < size && index >= 0) {
+              page++;
+              setState(() {
+                pageController.jumpToPage(page);
+              });
+            }
+          }
+        },
+        child: Text(
+          index == size ? "Continuar" : "Siguiente",
           style: TextStyle(
-            fontSize: 17,
-            color: Colors.black,
+              color:
+                  index == size ? ColorSelect.texButton1 : ColorSelect.btnblack,
+              fontSize: 16),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: index == size
+              ? ColorSelect.borderContainer
+              : ColorSelect.btnBackgrounBo1,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
-      );
-    } else {
-      return Container(
-        margin: const EdgeInsets.only(bottom: 30),
-        height: 50,
-        width: 350,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          //shape: BoxShape.rectangle,
-          //border: Border.all(
-          color: ColorSelect.btnBackgrounBo2,
-          //width: 3,
-          //),
-        ),
-        alignment: Alignment.center,
-        child: const Text(
-          'Continuar',
-          style: TextStyle(
-            fontSize: 17,
-            color: Colors.white,
-            
-          ),
-        ),
-      );
-    }
+      ),
+    );
   }
 }
 
@@ -165,8 +174,8 @@ class ContentBoarding extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
             Image.asset(
               image,
               width: 290,

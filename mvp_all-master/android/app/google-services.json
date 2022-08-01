@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "644492861123",
+    "project_id": "doorwater",
+    "storage_bucket": "doorwater.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644492861123:android:f583574f5a91f6ad854c76",
+        "android_client_info": {
+          "package_name": "com.example.mvp_all"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644492861123-mp523fje0pgjeo1fjrrttm52pg25t65a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mvp_all",
+            "certificate_hash": "e020b04e8b55091e427947576a3e884030b3ab4a"
+          }
+        },
+        {
+          "client_id": "644492861123-m4kgj8eu4i0ops161u8v13q6u3ctaet0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANCVHDyKyYUcQhFaHuZJwPxW02SjrQccg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644492861123-m4kgj8eu4i0ops161u8v13q6u3ctaet0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

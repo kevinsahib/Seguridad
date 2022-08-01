@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mvp_all/styles/colors/colors_views.dart';
 
 // Importaciones clase Vistas
+import '../pages/Home.dart';
 import '../pages/on_boarding.dart';
 
 class SplashView extends StatefulWidget {
@@ -24,28 +25,45 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SizedBox(
-          child: CustomPaint(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Container(
-                    child: Image.asset(
-                      "assets/images/splash.png",
-                      alignment: Alignment.center,
-                      height: 150,
-                    ),
-                  ),
+      backgroundColor: ColorSelect.init,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 110),
+              child: const Text(
+                'DOOR WATER ',
+                style: TextStyle(
+                  fontSize: 28,
+                  color: ColorSelect.texButton1,
+                  fontWeight: FontWeight.w600,
                 ),
-              ],
+                textAlign: TextAlign.left,
+              ),
             ),
-            painter: _SplashCanvas(),
-          ),
-          height: double.infinity,
-          width: double.infinity,
+            Center(
+              child: Container(
+                height: 220,
+                margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
+                child: Image.asset(
+                  'assets/images/gota.png',
+                  width: 300,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 300),
+              child: const Text(
+                '¡HIDRATATE CON AGUA DE CALIDAD! ',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: ColorSelect.btnblack,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -56,62 +74,8 @@ class _SplashViewState extends State<SplashView> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => OnBoarding(),
+        builder: (context) => homeinit(),
       ),
     );
-  }
-}
-
-class _SplashCanvas extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    // paint.color = Colors.amber;
-    paint.color = ColorSelect.btnBackgrounBo2;
-    // paint.style = PaintingStyle.stroke;
-    paint.style = PaintingStyle.fill;
-    paint.strokeWidth = 5;
-
-    final path = Path();
-
-    path.lineTo(0, size.height * 0.10);
-
-    path.quadraticBezierTo(size.width * 0.1, size.height * 0.20, size.width / 3,
-        size.height * 0.12);
-
-    path.quadraticBezierTo(size.width / 2.1, size.height * 0.08,
-        2 * (size.width / 3), size.height * 0.12);
-
-    path.quadraticBezierTo(size.width / 1.2, size.height * 0.15,
-        3 * (size.width / 3), size.height * 0.1);
-
-    path.lineTo(size.width, 0);
-
-    canvas.drawPath(path, paint);
-
-    final paint2 = Paint();
-
-    paint2.color = ColorSelect.btnBackgrounBo2;
-
-    paint2.style = PaintingStyle.fill;
-
-    paint2.strokeWidth = 5;
-
-    final path2 = Path();
-
-    path2.lineTo(0, size.height);
-    path2.quadraticBezierTo(
-        size.width * 0.70, size.height * 0.80, size.width, size.height);
-    path2.lineTo(size.width, size.height);
-    path2.lineTo(0, size.height);
-
-    canvas.drawPath(path2, paint2);
-
-    canvas.scale(0.30, 0.30);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

@@ -4,6 +4,11 @@
         android:label="mvp_all"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBHL6B4rQ0E6WRulabhPLO1fujcbrUQu6E"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -20,6 +25,11 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            
+
+  
+
+              AIzaSyDhi1M07JdEq38BGk0WKhkXTD_5eWAOnE8
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -30,5 +40,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+            
+       
     </application>
 </manifest>
